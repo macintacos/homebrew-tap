@@ -13,12 +13,12 @@ class HerdrScratch < Formula
   depends_on "tmux"
 
   def install
-    # libexec is the plugin root herdr is pointed at: the binary resolves
-    # tmux.conf and shell/ relative to it, and herdr-plugin.toml's action runs
-    # ./bin/herdr-scratch from it.
-    system "go", "build", *std_go_args(output: libexec/"bin/herdr-scratch")
-    libexec.install "herdr-plugin.toml", "tmux.conf", "shell"
-    bin.install_symlink libexec/"bin/herdr-scratch"
+    # The formula prefix doubles as the plugin root herdr is pointed at, so the
+    # path users have to type is one `brew --prefix` and nothing more. The
+    # layout it needs is the repo's own: bin/herdr-scratch, beside the manifest,
+    # tmux.conf and shell/ that the binary resolves relative to the root.
+    system "go", "build", *std_go_args(output: bin/"herdr-scratch")
+    prefix.install "herdr-plugin.toml", "tmux.conf", "shell"
   end
 
   def caveats
@@ -26,7 +26,7 @@ class HerdrScratch < Formula
       herdr has no plugin search path, and a formula must not write outside
       Homebrew's prefix, so registering the plugin is yours to run:
 
-        herdr plugin link #{opt_libexec}
+        herdr plugin link #{opt_prefix}
 
       Run it again after upgrading this formula. herdr resolves that path down
       to the real directory, which is version-numbered, so an upgrade leaves
@@ -51,8 +51,8 @@ class HerdrScratch < Formula
 
     # The plugin root has to carry more than the binary, or herdr loads a
     # plugin whose pane command and shell integration are both missing.
-    assert_path_exists libexec/"herdr-plugin.toml"
-    assert_path_exists libexec/"tmux.conf"
-    assert_path_exists libexec/"shell/herdr-scratch.fish"
+    assert_path_exists prefix/"herdr-plugin.toml"
+    assert_path_exists prefix/"tmux.conf"
+    assert_path_exists prefix/"shell/herdr-scratch.fish"
   end
 end
