@@ -1,8 +1,8 @@
 class HerdrScratch < Formula
   desc "Scratch shell popup for herdr that detaches instead of closing"
   homepage "https://github.com/macintacos/herdr-scratch"
-  url "https://github.com/macintacos/herdr-scratch/archive/refs/tags/v0.3.3.tar.gz"
-  sha256 "98a84b96f1a8eb455d8fe0f95ecaf467efb05acd50ffdf55310ca3470be25396"
+  url "https://github.com/macintacos/herdr-scratch/archive/refs/tags/v0.4.0.tar.gz"
+  sha256 "8b7dd21e9975555ebd0b24a43c2ce988e92c524cc628171ac25a54cb0e760971"
   license "MIT"
   head "https://github.com/macintacos/herdr-scratch.git", branch: "trunk"
 
