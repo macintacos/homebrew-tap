@@ -1,8 +1,8 @@
 class HerdrScratch < Formula
   desc "Scratch shell popup for herdr that detaches instead of closing"
   homepage "https://github.com/macintacos/herdr-scratch"
-  url "https://github.com/macintacos/herdr-scratch/archive/refs/tags/v0.2.0.tar.gz"
-  sha256 "82928e424b2d0f00179ee9a881fbd05b76d4d643005fce841cf9b4127cb4d02f"
+  url "https://github.com/macintacos/herdr-scratch/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "983849bfce859808b7a1e697d920a03d5b19ec666496a5214887a1cb99f840c6"
   license "MIT"
   head "https://github.com/macintacos/herdr-scratch.git", branch: "trunk"
 
@@ -23,14 +23,9 @@ class HerdrScratch < Formula
 
   def caveats
     <<~EOS
-      herdr has no plugin search path, and a formula must not write outside
-      Homebrew's prefix, so registering the plugin is yours to run:
+      Register the plugin with herdr. Once — upgrades need nothing:
 
-        herdr plugin link #{opt_prefix}
-
-      Run it again after upgrading this formula. herdr resolves that path down
-      to the real directory, which is version-numbered, so an upgrade leaves
-      the registration pointing at a version that no longer exists.
+        herdr-scratch link
 
       Then bind a key in ~/.config/herdr/config.toml:
 
