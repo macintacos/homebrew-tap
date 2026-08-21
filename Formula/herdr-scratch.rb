@@ -20,8 +20,8 @@ class HerdrScratch < Formula
     # -s -w is what std_go_args passes by default; naming ldflags replaces it
     # rather than adding to it, so both come along. The version is stamped from
     # the tag this built, which is what `herdr-scratch --version` reports.
-    system "go", "build", *std_go_args(output: bin/"herdr-scratch",
-                                       ldflags: "-s -w -X main.version=#{version}")
+    ldflags = "-s -w -X main.version=#{version}"
+    system "go", "build", *std_go_args(output: bin/"herdr-scratch", ldflags: ldflags)
     prefix.install "herdr-plugin.toml", "tmux.conf", "shell"
   end
 
