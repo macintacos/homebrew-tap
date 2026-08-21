@@ -1,8 +1,8 @@
 class HerdrScratch < Formula
   desc "Scratch shell popup for herdr that detaches instead of closing"
   homepage "https://github.com/macintacos/herdr-scratch"
-  url "https://github.com/macintacos/herdr-scratch/archive/refs/tags/v0.4.1.tar.gz"
-  sha256 "4b402f16736abf336fa5c3eaba8982fefa40da7afe700977d3994201094b2802"
+  url "https://github.com/macintacos/herdr-scratch/archive/refs/tags/v0.4.2.tar.gz"
+  sha256 "d891a70702edd849bd53e20a9338b596d29c5bb15341ed60952a63ab393e6435"
   license "MIT"
   head "https://github.com/macintacos/herdr-scratch.git", branch: "trunk"
 
@@ -17,7 +17,11 @@ class HerdrScratch < Formula
     # path users have to type is one `brew --prefix` and nothing more. The
     # layout it needs is the repo's own: bin/herdr-scratch, beside the manifest,
     # tmux.conf and shell/ that the binary resolves relative to the root.
-    system "go", "build", *std_go_args(output: bin/"herdr-scratch")
+    # -s -w is what std_go_args passes by default; naming ldflags replaces it
+    # rather than adding to it, so both come along. The version is stamped from
+    # the tag this built, which is what `herdr-scratch --version` reports.
+    system "go", "build", *std_go_args(output: bin/"herdr-scratch",
+                                       ldflags: "-s -w -X main.version=#{version}")
     prefix.install "herdr-plugin.toml", "tmux.conf", "shell"
   end
 
@@ -43,6 +47,10 @@ class HerdrScratch < Formula
 
   test do
     assert_match "herdr-scratch", shell_output("#{bin}/herdr-scratch --help")
+
+    # Catches an ldflags path that stopped stamping: the binary would still
+    # work, and would quietly report itself as "dev" forever after.
+    assert_equal version.to_s, shell_output("#{bin}/herdr-scratch --version").strip
 
     # The plugin root has to carry more than the binary, or herdr loads a
     # plugin whose pane command and shell integration are both missing.
