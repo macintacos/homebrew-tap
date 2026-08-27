@@ -5,15 +5,15 @@
 class HerdrReshape < Formula
   desc "Move the focused herdr pane, and best-fit a tab into an even grid"
   homepage "https://github.com/macintacos/herdr-reshape"
-  version "0.3.0"
+  version "0.3.1"
   license "MIT"
 
   depends_on "herdr"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.0/herdr-reshape_0.3.0_darwin_amd64.tar.gz"
-      sha256 "84f34b29b73c84e7e391de871bc39e90fff560608e9f748fd2855aea1bc016bd"
+      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.1/herdr-reshape_0.3.1_darwin_amd64.tar.gz"
+      sha256 "97fc3b49ad7b0e6fd727db70baf50eb5c9fcf1110c8eee70447fb5fe91ff034d"
 
       define_method(:install) do
         libexec.install "bin", "herdr-plugin.toml"
@@ -22,8 +22,8 @@ class HerdrReshape < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.0/herdr-reshape_0.3.0_darwin_arm64.tar.gz"
-      sha256 "a7bbeb106c205dc8899bcddb5842531644acc458283e18d5d8dc57a6b2e14cae"
+      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.1/herdr-reshape_0.3.1_darwin_arm64.tar.gz"
+      sha256 "18b7952e3aa5d93fc16f181c0fdbf64be286a44fb4699d8a2db72cf18058b7c5"
 
       define_method(:install) do
         libexec.install "bin", "herdr-plugin.toml"
@@ -35,8 +35,8 @@ class HerdrReshape < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.0/herdr-reshape_0.3.0_linux_amd64.tar.gz"
-      sha256 "dd44fdb09da7cdefd8b70bbf1862e2cb647eec51ab0df9e80c3619101dd88d1b"
+      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.1/herdr-reshape_0.3.1_linux_amd64.tar.gz"
+      sha256 "fee595a5e5d416a9b646497433b2d84ba385e9b2b2d5e6c4cd86f3b065d3ed36"
       define_method(:install) do
         libexec.install "bin", "herdr-plugin.toml"
         bin.install_symlink libexec/"bin/herdr-reshape"
@@ -44,8 +44,8 @@ class HerdrReshape < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.0/herdr-reshape_0.3.0_linux_arm64.tar.gz"
-      sha256 "416684acb618f4a62cba7d3667a44fbee39c998dabb4a9404bfa4b0d8ba49871"
+      url "https://github.com/macintacos/herdr-reshape/releases/download/v0.3.1/herdr-reshape_0.3.1_linux_arm64.tar.gz"
+      sha256 "221f6a782772868fab994dfcdbbad0ab5e06c3c842567d93cdf2780f86722b2e"
       define_method(:install) do
         libexec.install "bin", "herdr-plugin.toml"
         bin.install_symlink libexec/"bin/herdr-reshape"
